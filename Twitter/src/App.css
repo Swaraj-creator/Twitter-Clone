@@ -1,0 +1,63 @@
+/* @import "tailwindcss"; */
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.navBox {
+  max-width: 250px;
+  height: auto;
+  background-color: #f0f8ff05;
+  padding: 10px 15px 10px 10px;
+  border-radius: 10px;
+}
+
+.navs {
+    display: inline-flex;
+    width: 100%;
+    /* justify-content: left; */
+    align-items: center;
+    padding: 10px 20px;
+    /* background-color: #f0f8ff05; */
+    margin: 3px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.1s;
+    font-weight: bold;
+}
+.navs:hover {
+  transform: scale(1.02);
+  transition: all 0.1s;
+  background-color: #f0f8ff10;
+}
+.navs.active {
+  background-color: #f0f8ff10;
+}
+
+.tweetBtn {
+  width: calc(100% - 20px);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(18, 140, 197);
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  margin-top: 20px;
+  transition: all 0.1s;
+  align-self: center;
+  margin-left: 3px;
+}
+
+.tweetBtn:active {
+  border: none;
+  outline: none;
+  transition: all 0.1s;
+
+}
+.tweetBtn:hover {
+  transform: scale(0.95);
+  transition: all 0.1s;
+}
