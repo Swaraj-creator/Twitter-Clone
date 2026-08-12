@@ -2,9 +2,11 @@ import React from 'react'
 
 const Tweet = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+        <div className="tweetBox">
+            
+        </div>
+    </>
   )
 }
 
