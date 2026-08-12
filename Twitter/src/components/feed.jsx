@@ -4,6 +4,7 @@ import { RxImage } from "react-icons/rx";
 import { MdOutlineGifBox, MdOutlineEmojiEmotions, MdSchedule } from "react-icons/md";
 import { BiPoll } from "react-icons/bi";
 import { SlLocationPin } from "react-icons/sl";
+import Tweet from './tweet';
 
 const Feed = () => {
   return (
@@ -45,7 +46,7 @@ const Feed = () => {
                 </div>
             </div>
             <div className="feed">
-
+                <Tweet></Tweet>
             </div>
         </div>
     </>

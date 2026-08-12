@@ -101,7 +101,6 @@
   height: 100%;
   border-radius: 10px;
   position: relative;
-  overflow: scroll;
 }
 
 .createPost {
@@ -224,15 +223,19 @@
     flex-direction: row;
     align-items: center;
     justify-content: start;
-    margin: 20px 0px;
+    margin: 15px 0px;
     span {
-      margin: 0px 8px;
+      margin: 0px 1px;
       cursor: pointer;
       transition: all 0.1s;
+      padding: 7px;
+      border-radius: 50%;
+      background-color: transparent;
     }
     span:hover {
-      opacity: 0.8;
-      transform: scale(0.95);
+      background-color: #353535;
+      /* opacity: 0.8; */
+      transform: scale(1.1);
       transition: all 0.1s;
     }
   }
@@ -265,6 +268,112 @@
   min-height: 200px;
   border-radius: 10px;
   margin-top: 20px;
+  padding: 15px;
+}
+
+.tweetBox {
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  border: 2px solid #353536;
+}
+
+.post {
+  width: 100%;
+  height: auto;
+  padding-bottom: 20px;
+  p {
+    position: relative;
+    text-align: left;
+    top: 15px;
+    left: 80px;
+    width: fit-content;
+  }
+  .moreOptions {
+    font-size: 20px;
+    position: absolute;
+    right: 15px;
+    top: 13px;
+    padding: 5px;
+    background: transparent;
+    border-radius: 50%;
+    transition: all 0.1s;
+    cursor: pointer;
+  }
+  .moreOptions:hover {
+    background: #353535;
+    transition: all 0.1s;
+  }
+}
+hr {
+  width: calc(100% - 30px);
+  height: 2px;
+  background-color: #353535 !important;
+  outline: none;
+  border: none;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: -5px 0px 0px 0px;
+}
+
+.postContent {
+  position: relative;
+  width: calc(100% - 85px);
+  text-align: left;
+  font-size: 15px;
+  left: 80px;
+  margin-top: 20px;
+  padding-right: 20px;
+}
+
+.attachedContentBox {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  left: 0px;
+  padding-right: 20px;
+  margin-top: 15px;
+  display: none;
+}
+
+.reactArea {
+  width: calc(100% - 80px);
+  height: 30px;
+  position: relative;
+  left: 80px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  .additionalBtns {
+    width: 60px;
+    display: flex;
+    flex-direction: row;
+    /* gap: 15px; */
+    position: relative;
+    margin-right: 15px;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.authorPfp {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #353536;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: 15px;
+  left: 15px;
 }
 
 .rightBar {
