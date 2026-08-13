@@ -3,7 +3,7 @@ import LeftSideBar from './leftSideBar'
 import Feed from './feed'
 import RightSideBar from './rightSideBar'
 
-const homePage = () => {
+const HomePage = () => {
   return (
     <>
       <LeftSideBar></LeftSideBar>
@@ -13,4 +13,4 @@ const homePage = () => {
   )
 }
 
-export default homePage;
+export default HomePage;

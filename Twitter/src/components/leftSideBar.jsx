@@ -9,7 +9,7 @@ import { CgMoreO } from "react-icons/cg";
 import { HiUser, HiOutlineUser } from "react-icons/hi2";
 import logo from "../assets/logo.png";
 
-const leftSideBar = () => {
+const LeftSideBar = () => {
   return (
     <>
     <div className="navMain">
@@ -32,4 +32,4 @@ const leftSideBar = () => {
   )
 }
 
-export default leftSideBar;
+export default LeftSideBar;
