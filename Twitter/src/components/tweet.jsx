@@ -16,7 +16,8 @@ const Tweet = () => {
                 </div>
                 <p>
                     <span className="authorName">Swaraj Kashyap</span>
-                    <span className="verificationBadge"></span> • <span className="authorUsername">@swarajKashyap</span> • <span className="uploadedWhen">24h ago</span>
+                    <span className="verificationBadge"></span> &nbsp;<span className="authorUsername">@swarajKashyap</span>
+                    <span className="uploadedWhen"> • 24h ago</span>
                 </p>
                 <span className="moreOptions"><FiMoreHorizontal></FiMoreHorizontal></span>
                 <div className="postContent">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit culpa quibusdam deleniti atque dicta, natus consectetur explicabo soluta repellat illo iure. Nulla labore dolorem aut, assumenda saepe incidunt esse. Omnis, sed hic, deleniti reiciendis sequi fugiat voluptatum ea aliquid reprehenderit temporibus minus ipsa laborum quibusdam dolores nam repellat ad. Molestiae repellat a veritatis aspernatur repudiandae iusto rerum hic pariatur velit minima inventore distinctio excepturi eum ad minus, alias, praesentium eveniet dolore est qui neque. Incidunt, at non error itaque architecto fugiat explicabo unde ut modi labore reiciendis ipsum provident veniam! Nam enim illum voluptatum quidem inventore cupiditate, adipisci dolorem dolor?</div>
@@ -26,10 +27,10 @@ const Tweet = () => {
             </div>
             <hr />
             <div className="reactArea">
-                <span className="commentBtn"><BsChat></BsChat></span>
-                <span className="repostBtn"><FiRepeat></FiRepeat></span>
-                <span className="likeBtn"><FaRegHeart></FaRegHeart></span>
-                <span className="viewsBtn"><IoStatsChart></IoStatsChart></span>
+                <span className="commentBtn"><BsChat></BsChat><span>0</span></span>
+                <span className="repostBtn"><FiRepeat></FiRepeat><span>0</span></span>
+                <span className="likeBtn"><FaRegHeart></FaRegHeart><span>0</span></span>
+                <span className="viewsBtn"><IoStatsChart></IoStatsChart><span>0</span></span>
                 <div className="additionalBtns">
                     <span className="saveBtn"><FaRegBookmark /></span>
                     <span className="shareBtn"><FiShare></FiShare></span>

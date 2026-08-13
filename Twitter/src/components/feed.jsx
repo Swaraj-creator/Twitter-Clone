@@ -24,7 +24,7 @@ const Feed = () => {
                         <textarea name="postContent" id="postContent" onInput={(e) => {
                             e.target.style.height = "auto";
                             e.target.style.height = `${e.target.scrollHeight}px`;
-                            if(document.getElementById("postContent").value.trim() != "" && document.getElementById("postContent").value.trim() != " ") {
+                            if(document.getElementById("postContent").value != "") {
                                 document.querySelector(".placeHolder").style.display = "none";
                             } else {
                                 document.querySelector(".placeHolder").style.display = "block";
@@ -46,6 +46,12 @@ const Feed = () => {
                 </div>
             </div>
             <div className="feed">
+                <Tweet></Tweet>
+                <Tweet></Tweet>
+                <Tweet></Tweet>
+                <Tweet></Tweet>
+                <Tweet></Tweet>
+                <Tweet></Tweet>
                 <Tweet></Tweet>
             </div>
         </div>
