@@ -59,6 +59,13 @@
     transition: all 0.1s;
     font-weight: bold;
 }
+.navs div {
+  display: flex;
+  color: aliceblue;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
 .navs:hover {
   transform: scale(1.02);
   transition: all 0.1s;
@@ -95,12 +102,18 @@
   opacity: 0.85;
 }
 
-.feedBox {
+.feedBox, .profileBox, .exploreBox, .notificationBox, .trendingBox, .bookmarksBox, .messagesBox {
   max-width: 600px;
   width: calc(100%);
   height: 100%;
   border-radius: 10px;
   position: relative;
+}
+
+.profileBox, .exploreBox, .notificationBox, .trendingBox, .bookmarksBox, .messagesBox {
+  background-color: #f0f8ff05;
+  padding-bottom: 10px;
+  min-height: 200px;
 }
 
 .createPost {

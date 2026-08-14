@@ -8,8 +8,12 @@ import { RiAccountCircleFill, RiAccountCircleLine, } from "react-icons/ri";
 import { CgMoreO } from "react-icons/cg";
 import { HiUser, HiOutlineUser } from "react-icons/hi2";
 import logo from "../assets/logo.png";
+import { Link } from 'react-router-dom';
 
 const LeftSideBar = () => {
+  const activePage = (t) => {
+
+  }
   return (
     <>
     <div className="navMain">
@@ -17,14 +21,30 @@ const LeftSideBar = () => {
         <img src={logo} alt="" />
       </div>
       <div className="navBox">
-          <div className="navs active"><GoHomeFill className='text-2xl'/><p className="ml-8">Home</p></div>
-          <div className="navs"><GoHash className='text-2xl'/><p className="ml-8">Explore</p></div>
-          <div className="navs"><IoNotificationsOutline className='text-2xl'/><p className="ml-8">Notifications</p></div>
-          <div className="navs"><FaRegPaperPlane className='text-xl'/><p className="ml-8">Messages</p></div>
-          <div className="navs"><FaRegBookmark className='text-xl'/><p className="ml-8">Bookmark</p></div>
-          <div className="navs"><PiFireLight className='text-2xl'/><p className="ml-8">Trending</p></div>
-          <div className="navs"><HiOutlineUser className='text-2xl'/><p className="ml-8">Profile</p></div>
-          <div className="navs"><CgMoreO className='text-xl'/><p className="ml-8">More</p></div>
+          <Link to="/" className="navs active" onClick={activePage(this)}>
+            <div><GoHomeFill className='text-2xl'/><p className="ml-7">Home</p></div>
+          </Link>
+          <Link to="/explore" className="navs" onClick={activePage(this)}>
+            <div><GoHash className='text-2xl'/><p className="ml-7">Explore</p></div>
+          </Link>
+          <Link to="/notifications" className="navs" onClick={activePage(this)}>
+            <div><IoNotificationsOutline className='text-2xl'/><p className="ml-7">Notifications</p></div>
+          </Link>
+          <Link to="/messages" className="navs" onClick={activePage(this)}>
+            <div><FaRegPaperPlane className='text-xl'/><p className="ml-7">&nbsp;Messages</p></div>
+          </Link>
+          <Link to="/bookmarks" className="navs" onClick={activePage(this)}>
+            <div><FaRegBookmark className='text-xl'/><p className="ml-7">&nbsp;Bookmark</p></div>
+          </Link>
+          <Link to="/trending" className="navs" onClick={activePage(this)}>
+            <div><PiFireLight className='text-2xl'/><p className="ml-7">Trending</p></div>
+          </Link>
+          <Link to="/profile" className="navs" onClick={activePage(this)}>
+            <div><HiOutlineUser className='text-2xl'/><p className="ml-7">Profile</p></div>
+          </Link>
+          <Link to="/" className="navs" onClick={activePage(this)}>
+            <div><CgMoreO className='text-xl'/><p className="ml-7">&nbsp;More</p></div>
+          </Link>
           <button className="tweetBtn">Tweet</button>
       </div>
     </div>

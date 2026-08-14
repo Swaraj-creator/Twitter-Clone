@@ -52,7 +52,6 @@ const Feed = () => {
                 <Tweet></Tweet>
                 <Tweet></Tweet>
                 <Tweet></Tweet>
-                <Tweet></Tweet>
             </div>
         </div>
     </>
