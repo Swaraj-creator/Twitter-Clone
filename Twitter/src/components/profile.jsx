@@ -53,7 +53,10 @@ const MyProfile = () => {
             </div>
             <div className="profilePosts">
                 <div className="contentTypeSelector">
-
+                    <div className="posts active">Posts</div>
+                    <div className="replies">Replies</div>
+                    <div className="reposts">Reposts</div>
+                    <div className="media">Media</div>
                 </div>
                 <Tweet></Tweet>
                 <Tweet></Tweet>
