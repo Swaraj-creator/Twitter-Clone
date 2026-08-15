@@ -1,0 +1,143 @@
+.profileBox {
+    padding: 0px 0px 15px 0px;
+    border-radius: 10px;
+    position: relative;
+    top: -39px;
+}
+.profileBox::before {
+    content: "";
+    position: sticky;
+    display: block;
+    top: 0;
+    height: 40px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: #242424;
+}
+
+.profileNav {
+    width: 100%;
+    height: 60px;
+    position: sticky;
+    top: 30px;
+    background-color: #f0f8ff05;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    z-index: 10;
+    backdrop-filter: blur(30px);
+    border: 1px solid #353536;
+    .arrowBack {
+        color: white;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 10px;
+        font-size: 18px;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: transparent;
+        transition: all 0.1s;
+    }
+    .arrowBack:hover {
+        background-color: #f0f8ff10;
+        transform: translateY(-50%) scale(1.1);
+        transition: all 0.1s;
+    }
+    .userName {
+        font-size: 16px;
+        position: absolute;
+        top: 7px;
+        left: 60px;
+        font-weight: bold;
+    }
+    .postsNum {
+        font-size: 12px;
+        position: absolute;
+        bottom: 7px;
+        left: 60px;
+    } 
+}
+
+.profileData {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    background-color: #f0f8ff05;
+    padding: 15px;
+    border-radius: 10px;
+    div:nth-child(1) {
+        height: auto;
+        position: relative;
+        padding-bottom: 10px;
+        .banner {
+            width: 100%;
+            aspect-ratio: 3/1;
+            border: 1px solid #353535;
+            border-radius: 10px;
+        }
+        .pfp {
+            width: 30%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            position: relative;
+            border: 10px solid #282828;
+            background-color: #2d72aeb3;
+            left: 6%;
+            margin-top: -15%;
+        }
+        .editProfileBtn {
+            padding: 5px 20px;
+            font-size: 14px;
+            border-radius: 30px;
+            border: 2px solid #353535;
+            background: #282828;
+            position: absolute;
+            right: 10px;
+            top: 75%;
+            outline: none;
+        }
+    }
+    div:nth-child(2) {
+        height: auto;
+        position: relative;
+        padding-bottom: 10px;
+        .userName {
+            font-size: 22px;
+            font-weight: bold;
+            position: relative;
+            left: 15px;
+            text-align: left;
+        }
+        .userHandle {
+            font-size: 16px;
+            position: relative;
+            color: #f0f8fe52;
+            left: 15px;
+            text-align: left;
+        }
+        .getVerifiedBtn {
+            position: absolute;
+            font-size: 12px;
+            padding: 3px 20px;
+            border-radius: 20px;
+            border: 2px solid #353535;
+            background: #282828;
+            top: 5px;
+            left: 200px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            outline: none;
+            span {
+                position: relative;
+                left: -5px;
+                font-size: 18px;
+                color: #118cc5;
+            }
+        }
+    }
+}
