@@ -1,6 +1,8 @@
 import React from 'react'
 import { IoArrowBack } from "react-icons/io5";
 import { VscVerifiedFilled } from "react-icons/vsc";
+import { LuCalendarDays } from "react-icons/lu";
+import { IoIosArrowForward } from "react-icons/io";
 import Tweet from './tweet';
 import '../profileBox.css'
 import { Link } from 'react-router-dom';
@@ -32,11 +34,22 @@ const MyProfile = () => {
                         <span><VscVerifiedFilled></VscVerifiedFilled></span>
                         Get Verified
                     </button>
-
                 </div>
-                <p className="joinedDate">Joined 24 July, 2026</p>
-                <span className="followersList">Followers</span>
-                <span className="followingList">Following</span>
+                <p className="joinedDate">
+                    <span><LuCalendarDays></LuCalendarDays></span>
+                    Joined July 2026
+                    <span><IoIosArrowForward /></span>
+                </p>
+                <div>
+                    <span className="followersList">
+                        <span>24</span>
+                        Followers
+                    </span>
+                    <span className="followingList">
+                        <span>290</span>
+                        Following
+                    </span>
+                </div>
             </div>
             <div className="profilePosts">
                 <div className="contentTypeSelector">

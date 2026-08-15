@@ -139,5 +139,60 @@
                 color: #118cc5;
             }
         }
+        .bio {
+            width: 100%;
+            position: relative;
+            text-align: left;
+            padding: 15px;
+            padding-bottom: 10px;
+        }
+    }
+    .joinedDate {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: max-content;
+        align-items: center;
+        user-select: none;
+        cursor: default;
+        font-size: 16px;
+        padding: 0px 15px;
+        color: #858585;
+        span:nth-child(1) {
+            margin: 0px 10px 0px 0px;
+            font-size: 18px;
+        }
+        span:nth-child(2) {
+            margin: 0px 0px 0px 5px;
+        }
+    }
+    .joinedDate:hover {
+        text-decoration: underline;
+    }
+    div:nth-child(4) {
+        height: auto;
+        position: relative;
+        padding: 15px;
+        padding-bottom: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        span {
+            position: relative;
+            margin-right: 30px;
+            font-size: 16px;
+            color: #858585;
+            cursor: default;
+            span {
+                position: relative;
+                margin-right: 5px;
+                font-weight: bold;
+                color: #f0f8fe;
+            }
+        }
+        span:hover {
+            text-decoration: underline;
+        }
     }
 }
