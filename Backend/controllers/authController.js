@@ -42,7 +42,7 @@ export const Register = async ( req, res ) => {
         });
     } catch (err) {
         console.log(err);
-        res.status(401).json({
+        return res.status(401).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -78,9 +78,9 @@ export const Login = async ( req, res ) => {
             });
         }
 
-        const token = await jwt.sign({userId: user._id}, process.env.TOKEN_KEY, {expiresIn: "10d"});
+        const token = await jwt.sign({userId: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: "10d"});
         return res.status(201)
-        .cookie("token", token, {maxAge: 10 * 24 * 60 * 60 * 1000, httpOnly: true})
+        .cookie("token", token, {expiresIn: "10d", httpOnly: true})
         .json({
             message: "Login successful",
             responseCode: "103",
@@ -89,10 +89,19 @@ export const Login = async ( req, res ) => {
 
     } catch (err) {
         console.log(err);
-        res.status(401).json({
+        return res.status(401).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
         });
     }
+}
+
+export const Logout = async ( req, res ) => {
+    return res.cookie("token", "", {expiresIn: new Date(Date.now())})
+    .json({
+        message: "User logged out",
+        responseCode: 110,
+        success: true
+    });
 }
