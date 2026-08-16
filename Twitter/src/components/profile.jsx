@@ -58,14 +58,16 @@ const MyProfile = () => {
                     <div className="reposts">Reposts</div>
                     <div className="media">Media</div>
                 </div>
-                <Tweet></Tweet>
-                <Tweet></Tweet>
-                <Tweet></Tweet>
-                <Tweet></Tweet>
-                <Tweet></Tweet>
-                <Tweet></Tweet>
-                <Tweet></Tweet>
-                <Tweet></Tweet>
+                <div className="allPostsBox">
+                    <Tweet></Tweet>
+                    <Tweet></Tweet>
+                    <Tweet></Tweet>
+                    <Tweet></Tweet>
+                    <Tweet></Tweet>
+                    <Tweet></Tweet>
+                    <Tweet></Tweet>
+                    <Tweet></Tweet>
+                </div>
             </div>
         </div>
     </>

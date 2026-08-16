@@ -122,27 +122,56 @@
   height: auto;
   position: relative;
   border-radius: 10px;
-  padding-bottom: 4px;
+  padding: 1px;
+  margin-top: 15px;
 }
 
 .feedFromSelector {
-  width: calc(100% - 50px);
+  width: 100%;
   height: auto;
+  padding: 0px 0px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  padding: 0px 25px;
   font-size: 18px;
   font-weight: 600;
+  background: #f0f8ff05;
+  border: 1px solid #f0f8ff10;
+  backdrop-filter: blur(30px);
+  border-radius: 10px;
+  z-index: 10;
+  position: sticky;
+  top: 30px;
+  margin-top: -55px;
+  .tabs {
+    width: calc(100% - 50px);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+}
+.feedBox::before {
+    content: "";
+    position: sticky;
+    display: block;
+    top: 0;
+    height: 40px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: #242424;
 }
 
 .forYou, .following {
   position: relative;
-  padding: 15px 15%;
+  padding: 15px 25px;
   margin-top: 1px;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
+  width: 40%;
   span {
     width: 70%;
     height: 3px;
@@ -170,18 +199,32 @@
 }
 
 .settingsBtn {
-  position: absolute;
-  right: 25px;
+  position: relative;
+  right: 15px;
   font-size: 23px;
-  top: 20px;
+  /* top: 20px; */
+  background: transparent;
   color: #e3e3e3;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.settingsBtn:hover {
+  background-color: #f0f8ff10;
+  transform: scale(1.05);
+  transition: all 0.1s;
 }
 
 .createPostArea {
   /* min-height: 200px; */
-  width: calc(100% - 40px);
+  width: calc(100% - 20px);
   position: relative;
-  margin: 20px;
+  margin: 10px;
   border-radius: 10px;
   border: 2px dashed #353535;
   .profilePic {
@@ -280,9 +323,9 @@
   position: relative;
   min-height: 200px;
   border-radius: 10px;
-  margin-top: 20px;
-  padding: 15px;
-  gap: 15px;
+  margin-top: 15px;
+  padding: 10px;
+  gap: 10px;
   display: flex;
   flex-direction: column;
 }

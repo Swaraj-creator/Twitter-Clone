@@ -10,12 +10,14 @@ const Feed = () => {
   return (
     <>
         <div className="feedBox">
-            <div className="createPost">
-                <div className="feedFromSelector">
+            <div className="feedFromSelector">
+                <div className="tabs">
                     <div className="forYou active">For You<span></span></div>
                     <div className="following">Following<span></span></div>
                 </div>
                 <div className="settingsBtn"><TbSettings2 /></div>
+            </div>
+            <div className="createPost">
                 <div className="createPostArea">
                     <div className="profilePic">
                         <img src="https://i.pinimg.com/736x/2b/da/a5/2bdaa5be4e74c169603f18cec36f594c.jpg" alt="" />
