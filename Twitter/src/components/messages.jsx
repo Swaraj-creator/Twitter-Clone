@@ -1,4 +1,5 @@
 import React from 'react'
+import '../messagesBox.css'
 
 const Messages = () => {
   return (

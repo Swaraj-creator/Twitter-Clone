@@ -1,0 +1,6 @@
+.messagesBox {
+    width: calc(100% - 400px);
+    max-width: none;
+    height: calc(100dvh - 65px);
+    background-color: transparent;
+}

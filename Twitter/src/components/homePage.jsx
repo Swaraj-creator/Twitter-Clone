@@ -2,14 +2,17 @@ import React from 'react'
 import LeftSideBar from './leftSideBar'
 import Feed from './feed'
 import RightSideBar from './rightSideBar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 const HomePage = () => {
+  const location = useLocation();
+  const isMessages = location.pathname === "/messages"
+
   return (
     <>
       <LeftSideBar></LeftSideBar>
       <Outlet></Outlet>
-      <RightSideBar></RightSideBar>
+      {!isMessages && <RightSideBar></RightSideBar>}
     </>
   )
 }
