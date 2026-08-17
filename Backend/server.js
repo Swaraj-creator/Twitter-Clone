@@ -25,12 +25,6 @@ app.use(cookieParser());
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/tweet", tweetRoute);
 
-app.get("/home", ( req, res ) => {
-    res.status(200).json({
-        message: "Heyyyy"
-    })
-});
-
 app.listen(PORT, () => {
     console.log("server listening at port:", PORT);
 });

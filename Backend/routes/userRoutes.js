@@ -7,6 +7,6 @@ router.post("/register", Register);
 router.post("/login", Login);
 router.get("/logout", Logout);
 router.get("/profile/:id", GetMyProfile);
-router.get("/people", GetOtherUsers);
+router.get("/people/:id", GetOtherUsers);
 
 export default router;

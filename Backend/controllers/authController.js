@@ -140,7 +140,7 @@ export const GetMyProfile = async ( req, res ) => {
 }
 
 export const GetOtherUsers = async ( req, res ) => {
-    const userId = req.body.userId;
+    const {userId} = req.params.id;
     try {
         let otherUsers = await User.find({_id: {$ne: userId}}).select("-password");
     
