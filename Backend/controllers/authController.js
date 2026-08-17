@@ -108,24 +108,58 @@ export const Logout = async ( req, res ) => {
 
 export const GetMyProfile = async ( req, res ) => {
     const userId = req.params.id;
-    let user = await User.findById(userId);
-    if (!user) {
-        return res.status(404).json({
-            message: "Unable to fetch user data"
+    try {
+        let user = await User.findById(userId).select("-password");
+        if (!user) {
+            return res.status(404).json({
+                message: "Unable to fetch user data"
+            });
+        }
+    
+        user = {
+            name: user.name,
+            username: user.username,
+            email: user.email,
+            bookmarks: user.bookmarks,
+            followers: user.followers,
+            following: user.following,
+            joinedDate: user.createdAt
+        }
+        return res.status(200).json({
+            message: "User data fetched successfully",
+            user: user
+        });
+    } catch (error) {
+        console.log(err);
+        return res.status(401).json({
+            message: "Some error occured",
+            responseCode: "104",
+            success: false
         });
     }
+}
 
-    user = {
-        name: user.name,
-        username: user.username,
-        email: user.email,
-        bookmarks: user.bookmarks,
-        followers: user.followers,
-        following: user.following,
-        joinedDate: user.createdAt
+export const GetOtherUsers = async ( req, res ) => {
+    const userId = req.body.userId;
+    try {
+        let otherUsers = await User.find({_id: {$ne: userId}}).select("-password");
+    
+        if (!otherUsers) {
+            return res.status(404).json({
+                message: "Unable to fetch Other users"
+            });
+        }
+    
+        return res.status(200).json({
+            message: "Users fetched successfully",
+            users: otherUsers
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json({
+            message: "Some error occured",
+            responseCode: "104",
+            success: false
+        });
     }
-    return res.status(200).json({
-        message: "User data fetched successfully",
-        user: user
-    });
 }
