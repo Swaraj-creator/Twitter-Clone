@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema({
     following: {
         type: Array,
         default: []
+    },
+    bookmarks: {
+        type: Array,
+        default: []
     }
 }, {
     timestamps: true

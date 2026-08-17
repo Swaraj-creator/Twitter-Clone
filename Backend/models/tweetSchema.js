@@ -16,6 +16,10 @@ const TweetSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+    viewCount: {
+        type: mongoose.Schema.Types.Number,
+        default: 0
     }
 },
 {

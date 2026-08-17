@@ -1,4 +1,5 @@
 import { Tweet } from "../models/tweetSchema.js";
+import { User } from "../models/userSchema.js";
 
 export const CreateTweet = async ( req, res ) => {
     try {
@@ -87,11 +88,13 @@ export const Bookmark = async ( req, res ) => {
     try {
         if(tweet.bookmarks.includes(userId)) {
             await Tweet.findByIdAndUpdate(tweetId, {$pull: {bookmarks: userId}});
+            await User.findByIdAndUpdate(userId, {$pull: {bookmarks: tweetId}});
             return res.status(200).json({
                 message: "Removed from bookmarks"
             });
         } else {
             await Tweet.findByIdAndUpdate(tweetId, {$push: {bookmarks: userId}});
+            await User.findByIdAndUpdate(userId, {$push: {bookmarks: tweetId}});
             return res.status(200).json({
                 message: "Bookmarked"
             });
@@ -106,6 +109,31 @@ export const Bookmark = async ( req, res ) => {
     }
 }
 
-// export const SetViewCount = async ( req, res ) => {
+export const SetViewCount = async ( req, res ) => {
+    const userId = req.body.userId;
+    const tweetId = req.params.id;
+    const tweet = await Tweet.findById(tweetId);
 
-// }
+    try {
+        if(!tweet) {
+            return res.status(404).json({
+                message: "Tweet not found",
+                responseCode: "105",
+                success: false
+            });
+        }
+    
+        await Tweet.findByIdAndUpdate(tweetId, {viewCount: parseInt(tweet.viewCount) + 1});
+        return res.status(200).json({
+            message: `Views = ${parseInt(tweet.viewCount) + 1}`
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json({
+            message: "Some error occured",
+            responseCode: "104",
+            success: false
+        });
+    }
+}
