@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import databaseConnection from './config/database.js';
 import cookieParser from 'cookie-parser';
 import userRoute from './routes/userRoutes.js'
+import tweetRoute from './routes/tweetRoutes.js'
 
 dotenv.config({
     path: ".env"
@@ -22,6 +23,7 @@ app.use(cookieParser());
 
 //apis
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/tweet", tweetRoute);
 
 app.get("/home", ( req, res ) => {
     res.status(200).json({
