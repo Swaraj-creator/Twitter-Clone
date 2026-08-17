@@ -105,3 +105,27 @@ export const Logout = async ( req, res ) => {
         success: true
     });
 }
+
+export const GetMyProfile = async ( req, res ) => {
+    const userId = req.params.id;
+    let user = await User.findById(userId);
+    if (!user) {
+        return res.status(404).json({
+            message: "Unable to fetch user data"
+        });
+    }
+
+    user = {
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        bookmarks: user.bookmarks,
+        followers: user.followers,
+        following: user.following,
+        joinedDate: user.createdAt
+    }
+    return res.status(200).json({
+        message: "User data fetched successfully",
+        user: user
+    });
+}
