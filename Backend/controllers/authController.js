@@ -1,7 +1,7 @@
 import { User } from "../models/userSchema.js";
 import dotenv from "dotenv"
 import bcryptjs from "bcryptjs"
-import jwt from "jsonwebtoken"
+import jwt, { decode } from "jsonwebtoken"
 
 dotenv.config({
     path: "../.env"
@@ -165,7 +165,9 @@ export const GetOtherUsers = async ( req, res ) => {
 }
 
 export const FollowUnfollowUser = async ( req, res ) => {
-    const myId = req.body.userId;
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const myId = decoded.userId;
     const userId = req.params.id;
 
     if (myId == userId) {
@@ -174,7 +176,7 @@ export const FollowUnfollowUser = async ( req, res ) => {
             success: false
         });
     }
-    
+
     try {
         const myData = await User.findById(myId).select("-password");
         const userData = await User.findById(userId).select("-password");
@@ -193,8 +195,8 @@ export const FollowUnfollowUser = async ( req, res ) => {
                 success: true
             });
         } else {
-            await User.findByIdAndUpdate(myId, {$push:{following: userId}});
-            await User.findByIdAndUpdate(userId, {$push:{followers: myId}});
+            await User.findByIdAndUpdate(myId, {$addToSet:{following: userId}});
+            await User.findByIdAndUpdate(userId, {$addToSet:{followers: myId}});
             return res.status(200).json({
                 message: "Followed" + userData.name,
                 success: true
