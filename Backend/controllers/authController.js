@@ -163,3 +163,54 @@ export const GetOtherUsers = async ( req, res ) => {
         });
     }
 }
+
+export const FollowUnfollowUser = async ( req, res ) => {
+    const myId = req.body.userId;
+    const userId = req.params.id;
+
+    if (myId == userId) {
+        return res.status(403).json({
+            message: "You cant follow yourself",
+            success: false
+        });
+    }
+    
+    try {
+        const myData = await User.findById(myId).select("-password");
+        const userData = await User.findById(userId).select("-password");
+
+        if (!userData || !myData) {
+            return res.status(404).json({
+                message: "Unable to fetch Other users"
+            });
+        }
+
+        if (myData.following.includes(userId) && userData.followers.includes(myId)) {
+            await User.findByIdAndUpdate(myId, {$pull:{following: userId}});
+            await User.findByIdAndUpdate(userId, {$pull:{followers: myId}});
+            return res.status(200).json({
+                message: "Unfollowed" + userData.name,
+                success: true
+            });
+        } else {
+            await User.findByIdAndUpdate(myId, {$push:{following: userId}});
+            await User.findByIdAndUpdate(userId, {$push:{followers: myId}});
+            return res.status(200).json({
+                message: "Followed" + userData.name,
+                success: true
+            });
+        }
+
+        return res.status(401).json({
+            message: "Unable to follow",
+            success: false
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json({
+            message: "Some error occured",
+            responseCode: "104",
+            success: false
+        });
+    }
+}
