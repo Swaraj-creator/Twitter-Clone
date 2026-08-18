@@ -42,7 +42,7 @@ export const Register = async ( req, res ) => {
         });
     } catch (err) {
         console.log(err);
-        return res.status(401).json({
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -64,7 +64,7 @@ export const Login = async ( req, res ) => {
         let user = await User.findOne({ email });
         if(!user) {
             return res.status(404).json({
-                message: "User not found",
+                message: "Invalid email or password",
                 responseCode: "105",
                 success: false
             });
@@ -72,14 +72,14 @@ export const Login = async ( req, res ) => {
 
         if(!await bcryptjs.compare(password, user.password)) {
             return res.status(401).json({
-                message: "Wrong password",
+                message: "Invalid email or password",
                 responseCode: "106",
                 success: false
             });
         }
 
         const token = await jwt.sign({userId: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: "10d"});
-        return res.status(201)
+        return res.status(200)
         .cookie("token", token, {expiresIn: "10d", httpOnly: true})
         .json({
             message: "Login successful",
@@ -89,7 +89,7 @@ export const Login = async ( req, res ) => {
 
     } catch (err) {
         console.log(err);
-        return res.status(401).json({
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -106,10 +106,17 @@ export const Logout = async ( req, res ) => {
     });
 }
 
-export const GetMyProfile = async ( req, res ) => {
-    const userId = req.params.id;
+export const GetProfile = async ( req, res ) => {
     try {
+        const token = req.cookies.token;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        let userId = decoded.userId;
+        const fetchedId = req.params.id;
+        const isMe = (userId == fetchedId) ? true : false;
+
+        userId = (userId == fetchedId) ? userId : fetchedId;
         let user = await User.findById(userId).select("-password");
+
         if (!user) {
             return res.status(404).json({
                 message: "Unable to fetch user data"
@@ -119,19 +126,23 @@ export const GetMyProfile = async ( req, res ) => {
         user = {
             name: user.name,
             username: user.username,
-            email: user.email,
-            bookmarks: user.bookmarks,
             followers: user.followers,
             following: user.following,
-            joinedDate: user.createdAt
+            joinedDate: user.createdAt,
+            isMe: isMe
         }
+        if (isMe) {
+            user.email = user.email;
+            user.bookmarks = user.bookmarks
+        }
+
         return res.status(200).json({
             message: "User data fetched successfully",
             user: user
         });
     } catch (error) {
-        console.log(err);
-        return res.status(401).json({
+        console.log(error);
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -140,9 +151,9 @@ export const GetMyProfile = async ( req, res ) => {
 }
 
 export const GetOtherUsers = async ( req, res ) => {
-    const {userId} = req.params.id;
+    const userId = req.params.id;
     try {
-        let otherUsers = await User.find({_id: {$ne: userId}}).select("-password");
+        let otherUsers = await User.find({_id: {$ne: userId}}).select("-password -email -bookmarks");
     
         if (!otherUsers) {
             return res.status(404).json({
@@ -156,7 +167,7 @@ export const GetOtherUsers = async ( req, res ) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -165,21 +176,19 @@ export const GetOtherUsers = async ( req, res ) => {
 }
 
 export const FollowUnfollowUser = async ( req, res ) => {
-    const token = req.cookies.token;
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    const myId = decoded.userId;
-    const userId = req.params.id;
-
-    if (myId == userId) {
-        return res.status(403).json({
-            message: "You cant follow yourself",
-            success: false
-        });
-    }
-
     try {
-        const myData = await User.findById(myId).select("-password");
-        const userData = await User.findById(userId).select("-password");
+        const token = req.cookies.token;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const myId = decoded.userId;
+        const userId = req.params.id;
+        if (myId == userId) {
+            return res.status(403).json({
+                message: "You cant follow yourself",
+                success: false
+            });
+        }
+        const myData = await User.findById(myId).select("following");
+        const userData = await User.findById(userId).select("name followers");
 
         if (!userData || !myData) {
             return res.status(404).json({
@@ -187,7 +196,7 @@ export const FollowUnfollowUser = async ( req, res ) => {
             });
         }
 
-        if (myData.following.includes(userId) && userData.followers.includes(myId)) {
+        if (myData.following.includes(userId)) {
             await User.findByIdAndUpdate(myId, {$pull:{following: userId}});
             await User.findByIdAndUpdate(userId, {$pull:{followers: myId}});
             return res.status(200).json({
@@ -209,7 +218,7 @@ export const FollowUnfollowUser = async ( req, res ) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
