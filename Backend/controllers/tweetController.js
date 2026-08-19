@@ -25,7 +25,7 @@ export const CreateTweet = async ( req, res ) => {
 
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -43,7 +43,7 @@ export const DeleteTweet = async ( req, res ) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -72,7 +72,7 @@ export const LikeOrUnlikeTweet = async ( req, res ) => {
         }
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -101,7 +101,7 @@ export const Bookmark = async ( req, res ) => {
         }
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false
@@ -130,7 +130,39 @@ export const SetViewCount = async ( req, res ) => {
 
     } catch (error) {
         console.log(error);
-        return res.status(401).json({
+        return res.status(500).json({
+            message: "Some error occured",
+            responseCode: "104",
+            success: false
+        });
+    }
+}
+
+export const GetAllTweets = async ( req, res ) => {
+    try {
+        const id = req.params.id;
+        const loggedInUser = await User.findById(id).select("-password -bookmarks -email");
+        const userIds = [id, ...loggedInUser.following];
+        // const loggedInUserTweets = await Tweet.find({userId: id});
+        // const followingUserTweets = await Promise.all(loggedInUser.following.map((otherUsersId) => {
+        //     return Tweet.find({userId: otherUsersId});
+        // }));
+        const tweets = await Tweet.find({
+            userId: { $in: userIds }
+        });
+        const tweetData = tweets.map((tweet) => {
+            const data = tweet.toObject();
+            data.isBookmarked = data.bookmarks.includes(id);
+            data.bookmarksCount = data.bookmarks.length;
+            delete data.bookmarks;
+            return data;
+        });
+        return res.status(200).json({
+            tweets: tweetData
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
             message: "Some error occured",
             responseCode: "104",
             success: false

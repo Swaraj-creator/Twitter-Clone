@@ -133,7 +133,7 @@ export const GetProfile = async ( req, res ) => {
         }
         if (isMe) {
             user.email = user.email;
-            user.bookmarks = user.bookmarks
+            user.bookmarks = user.bookmarks;
         }
 
         return res.status(200).json({
