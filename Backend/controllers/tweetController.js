@@ -123,7 +123,7 @@ export const SetViewCount = async ( req, res ) => {
             });
         }
     
-        await Tweet.findByIdAndUpdate(tweetId, {viewCount: parseInt(tweet.viewCount) + 1});
+        await Tweet.findByIdAndUpdate(tweetId, {$inc: {viewCount: 1}});
         return res.status(200).json({
             message: `Views = ${parseInt(tweet.viewCount) + 1}`
         });
@@ -159,6 +159,39 @@ export const GetAllTweets = async ( req, res ) => {
         });
         return res.status(200).json({
             tweets: tweetData
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Some error occured",
+            responseCode: "104",
+            success: false
+        });
+    }
+}
+
+export const GetFollowingTweets = async ( req, res ) => {
+    try {
+        const myId = req.params.id;
+        const myFollowing = await User.findById(myId).select("following");
+
+        if(myFollowing) {
+            const followingUsersTweets = await Tweet.find({userId: {$in: myFollowing.following}});
+    
+            const tweetData = followingUsersTweets.map((tweet) => {
+                const data = tweet.toObject();
+                data.isBookmarked = data.bookmarks.includes(myId);
+                data.bookmarksCount = data.bookmarks.length;
+                delete data.bookmarks;
+                return data;
+            });
+            return res.status(200).json({
+                tweets: tweetData
+            });
+        }
+
+        return res.status(200).json({
+            tweets: []
         });
     } catch (error) {
         console.log(error);
