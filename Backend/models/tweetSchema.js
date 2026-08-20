@@ -20,6 +20,10 @@ const TweetSchema = new mongoose.Schema({
     viewCount: {
         type: mongoose.Schema.Types.Number,
         default: 0
+    },
+    hashTags: {
+        type: Array,
+        default: []
     }
 },
 {

@@ -1,9 +1,10 @@
 import { Tweet } from "../models/tweetSchema.js";
 import { User } from "../models/userSchema.js";
+import { Preferences } from "../models/preferences.js"
 
 export const CreateTweet = async ( req, res ) => {
     try {
-        const {description, userId} = req.body;
+        const {description, userId, tags} = req.body;
         if(!description || !userId) {
             return res.status(401).json({
                 message: "Fields are required",
@@ -14,7 +15,8 @@ export const CreateTweet = async ( req, res ) => {
 
         const tweet = await Tweet.create({
             description,
-            userId: userId
+            userId: userId,
+            hashTags: tags
         });
         return res.status(201).json({
             message: "Tweet created successfully",
@@ -143,10 +145,32 @@ export const GetAllTweets = async ( req, res ) => {
         const id = req.params.id;
         const loggedInUser = await User.findById(id).select("-password -bookmarks -email");
         const userIds = [id, ...loggedInUser.following];
-        // const loggedInUserTweets = await Tweet.find({userId: id});
-        // const followingUserTweets = await Promise.all(loggedInUser.following.map((otherUsersId) => {
-        //     return Tweet.find({userId: otherUsersId});
-        // }));
+        const preferences = await Preferences.findOne({userId: id});
+
+        let finalPreferenceList = [];
+        let topicName;
+
+        preferences.interests.forEach(preference => {
+            topicName = preference.topic;
+            let score = (Math.log1p(preference.viewCount) * 1) +
+                        (preference.watchRatio * 2) +
+                        (Math.log1p(preference.likes) * 5) + 
+                        (Math.log1p(preference.replies) * 7) + 
+                        (Math.log1p(preference.reposts) * 6) +
+                        (Math.log1p(preference.bookmarks) * 8) +
+                        (Math.log1p(preference.shares) * 9) +
+                        (Math.log1p(preference.profileVisits) * 4) - 
+                        (Math.log1p(preference.skips) * 4);
+            let delaySinceInteraction = (Date.now() - preference.lastInteractedAt) / (1000 * 60 * 60 * 24);
+            let decay = Math.exp(-preference.decayRate * delaySinceInteraction);
+            const finalScore = score * decay;
+
+            finalPreferenceList.push(...{
+                topic: topicName,
+                score: finalScore
+            });
+        });
+
         const tweets = await Tweet.find({
             userId: { $in: userIds }
         });

@@ -30,6 +30,14 @@ const UserSchema = new mongoose.Schema({
     bookmarks: {
         type: Array,
         default: []
+    }, 
+    topics: {
+        type: Array,
+        default: []
+    },
+    followedHashtags: {
+        type: Array,
+        default: []
     }
 }, {
     timestamps: true
