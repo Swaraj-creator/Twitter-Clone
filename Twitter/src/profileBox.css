@@ -252,9 +252,12 @@
             justify-items: center;
             cursor: pointer;
             user-select: none;
+            transition: all 0.1s;
         }
         div:hover {
             background-color: #f0f8ff10;
+            color: #f0f8fe;
+            transition: all 0.1s;
         }
         div.active {
             color: #f0f8fe;

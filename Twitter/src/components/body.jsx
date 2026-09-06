@@ -9,6 +9,7 @@ import Notifications from './notifications';
 import Messages from './messages'
 import Bookmarks from './bookmarks'
 import Trending from './trending'
+import Register from './register';
 
 const Body = () => {
     const appRouter = createBrowserRouter([
@@ -42,6 +43,9 @@ const Body = () => {
         }, {
             path: "/login",
             element: <Login></Login>
+        }, {
+            path: "/register",
+            element: <Register></Register>
         }
     ])
     return (
