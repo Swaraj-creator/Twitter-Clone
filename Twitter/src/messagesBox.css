@@ -3,4 +3,29 @@
     max-width: none;
     height: calc(100dvh - 65px);
     background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.chatsList {
+    max-height: calc(100% - 100px);
+    height: auto;
+    min-height: 200px;
+    width: 30%;
+    min-width: 300px;
+    background-color: #f0f8ff05;
+    border-radius: 20px;
+    position: relative;
+}
+
+.chatsBox {
+    max-height: calc(100% - 100px);
+    height: auto;
+    min-height: 200px;
+    width: 70%;
+    background-color: #f0f8ff05;
+    border-radius: 20px;
+    position: relative;
 }
