@@ -3,18 +3,21 @@ import { Link } from "react-router-dom";
 import "../signup.css"
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoApple } from "react-icons/io5";
+import { FaTwitter } from "react-icons/fa6";
 
 const Login = () => {
   return (
     <>
         <div className="signBox">
             <div className="leftLogos">
-
+              <span className="logo-svg">
+                <FaTwitter/>
+              </span>
+              <h2>Happening Now</h2>
             </div>
             <div className="formBox">
-              <h2>Happening Now</h2>
               <div className="form">
-                <h4>Sign in to Twitter!</h4>
+                <h4>Sign in to Twitter</h4>
                 <div className="user">
                   <label htmlFor="userId">Phone or Username or Email</label>
                   <input type="text" name="userId" id="userId" placeholder=''/>
