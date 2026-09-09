@@ -6,9 +6,16 @@ const Messages = () => {
     <div className="messagesBox">
       <div className="chatsList">
         <h3>Your Chats</h3>
-        <input type="text" placeholder='Search for Chat...'/>
+        <div>
+          <input type="text" placeholder='Search for Chat...'/>
+        </div>
         <div className="allChats">
-
+          <div className="chatUser">
+            <div className="chat-user-pfp"></div>
+            <p className="chat-user-name"></p>
+            <p className="chat-last-message"></p>
+            <span className="chat-last-time">11:23am</span>
+          </div>
         </div>
       </div>
       <div className="chatsBox">
