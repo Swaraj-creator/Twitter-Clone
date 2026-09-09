@@ -104,7 +104,7 @@ const Messages = () => {
             </div>
           </div>
         </div>
-        <div className="inputArea">
+        <div className="msgInputArea">
           <button className="addBtn"><IoAddCircleOutline /></button>
           <textarea placeholder='Type a message...'/>
           <button className="sendBtn">Send <span><BiSolidSend /></span></button>
