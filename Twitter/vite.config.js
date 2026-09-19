@@ -10,6 +10,6 @@ export default defineConfig({
   ],
   base: "./",
   server: {
-    allowedHosts: "reliant-glynda-soon.ngrok-free.dev"
+    allowedHosts: true
   } 
 });

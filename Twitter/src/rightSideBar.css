@@ -1,0 +1,46 @@
+.rightBar {
+  width: 35%;
+  max-width: 350px;
+  background-color: #f0f8ff05;
+  border-radius: 10px;
+  position: sticky;
+  top: 30px;
+  padding-bottom: 10px;
+}
+.searchBox {
+  width: calc(100% - 20px);
+  height: 50px;
+  position: relative;
+  margin-top: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  background: #353536;
+  border-radius: 10px;
+  span {
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+  }
+  #searchInput {
+    position: absolute;
+    top: 50%;
+    left: 45px;
+    transform: translateY(-50%);
+    padding: 3px 2px 3px 0px;
+    width: calc(100% - 60px);
+    outline: none;
+    border: none;
+  }
+  p {
+    position: absolute;
+    top: 50%;
+    left: 45px;
+    transform: translateY(-50%);
+    color: #a5a5a5;
+    pointer-events: none;
+    user-select: none;
+    z-index: -1;
+  }
+}
